@@ -1,0 +1,16 @@
+form {
+    border: 1px solid black;
+    border-radius: 5px;
+    max-width: 200px;
+}
+
+input {
+    border: 1px solid grey;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.primary-button {
+    margin-left: 8px;
+}

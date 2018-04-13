@@ -1,0 +1,10 @@
+.marker {
+    max-width: 50px;
+    padding: 8px;
+    background: purple;
+    border: 1px solid black;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.7em;
+    cursor: pointer;
+}
