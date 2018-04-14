@@ -1,10 +1,11 @@
 .danger-button {
-    background: #FF495F;
-    padding: 4px;
+    background: #d9534f;
+    width: 80px;
+    height: 34px;
     border-radius: 8px;
     color: #FFF;
     font-size: 0.8em;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Tahoma, Helvetica, sans-serif;
     text-transform: uppercase;
     cursor:pointer;
 }
