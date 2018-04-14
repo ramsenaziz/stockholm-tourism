@@ -39,9 +39,6 @@ class App extends Component {
   //    console.log(lat, lng);
   //   };
 
-    focusOnLocation() {
-        console.log('Clicked');
-    }
 
   render() {
     const center = {
@@ -50,7 +47,7 @@ class App extends Component {
     }
     const locations = this.state.locations;
     const listItems = locations.map((location) =>
-      <li key={location.id}><span>{location.name}</span><DeleteButton /></li>
+      <li key={location.id}><span className="location-name">{location.name}</span><DeleteButton /></li>
     );
 
     return (
@@ -63,11 +60,10 @@ class App extends Component {
               zoom={11}
               onClick={this.handleClick}
             >
-            <Marker
-              lat={59.339832}
-              lng={18.075802}
-              text="Stureplan"
-            />
+            {this.state.locations.map((location) => {
+              return <Marker key={location.id} lat={location.lat} lng={location.lng} text={location.name} /> 
+          })}
+
             </GoogleMapReact>
           </div>
 
