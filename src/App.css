@@ -5,6 +5,8 @@
 
 .list-container {
     padding: 20px;
+    border-radius: 4px;
+    border: 1px solid grey;
 }
 
 h2 {
@@ -13,7 +15,7 @@ h2 {
  }
  
  ol {
-     border: 1px solid grey;
+     padding: 8px;
  }
  
  li {
@@ -26,11 +28,12 @@ h2 {
      margin-right: 10px;
  }
  
- span {
+ .location-name {
      cursor:pointer;
  }
  
- span:hover {
+ .location-name:hover {
      opacity: 0.5;
+     color: #000;
  }
  
