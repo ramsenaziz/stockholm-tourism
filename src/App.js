@@ -30,12 +30,7 @@ class App extends Component {
           lng: "18.071664" 
         },
       ],
-      center: {
-        lat: 59.32,
-        lng: 18.06
-      },
-      zoom: 11
-    };
+    }
 
     this.focusOnLocation = this.focusOnLocation.bind(this);
   }
@@ -49,7 +44,10 @@ class App extends Component {
     }
 
   render() {
-
+    const center = {
+      lat: 59.32,
+      lng: 18.06
+    }
     const locations = this.state.locations;
     const listItems = locations.map((location) =>
       <li key={location.id}><span>{location.name}</span><DeleteButton /></li>
@@ -61,8 +59,8 @@ class App extends Component {
 
           <div className="map-container">
             <GoogleMapReact
-              center={this.state.center}
-              zoom={this.state.zoom}
+              center={center}
+              zoom={11}
               onClick={this.handleClick}
             >
             <Marker
@@ -86,4 +84,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
