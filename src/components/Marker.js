@@ -5,8 +5,8 @@ import './Marker.css'
 class Marker extends Component {
     render() {
         return (
-            <div className="marker">
-                {this.props.text}
+            <div>
+                <span className="marker-text">{this.props.text}</span>
             </div>
         );
     }

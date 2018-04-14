@@ -1,10 +1,10 @@
-.marker {
-    max-width: 50px;
+.marker-text {
+    width: 100%;
     padding: 8px;
-    background: purple;
+    background: lightskyblue;
     border: 1px solid black;
     border-radius: 6px;
-    color: #fff;
-    font-size: 0.7em;
+    color: #000;
+    font-size: 1em;
     cursor: pointer;
 }
