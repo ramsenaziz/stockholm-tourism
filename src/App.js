@@ -2,15 +2,14 @@ import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
 import Location from './components/Location'
 import Marker from './components/Marker'
-import DeleteButton from './components/DeleteButton'
 import SaveLocationForm from './components/SaveLocationForm'
 import './App.css'
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // Hard coded locations for demonstration purpose
       locations: [
         { 
           id: 1,
@@ -55,21 +54,21 @@ class App extends Component {
       search: "",
       currentLat: null,
       currentLng: null,
+      displayLocationForm: false,
     };
 
     this.getCoordinates = this.getCoordinates.bind(this);
-  
   }
 
   getCoordinates = (data) => {
-    let lat = data.lat;
-    let lng = data.lng;
-    console.log('lat: ' + lat);
-    console.log('let: ' + lng);
+    const lat = data.lat;
+    const lng = data.lng;
+    const displayLocationForm = this.state.displayLocationForm;
 
     this.setState({
       currentLat: lat,
-      currentLng: lng
+      currentLng: lng,
+      displayLocationForm: true
     })
   }
   
@@ -80,10 +79,22 @@ class App extends Component {
       lat: this.state.currentLat,
       lng: this.state.currentLng
     }
-
     this.setState({
       locations: this.state.locations.concat(newLocation),
       allLocations: this.state.locations.concat(newLocation)
+    })
+  }
+
+  handleDeleteLocation = (location) => {
+    const locations = this.state.locations;
+    for(var i = 0; i < locations.length; i++) {
+      if(locations[i].id == location.id){
+        locations.splice(i, 1)
+      }
+    }
+    this.setState({
+      locations: locations,
+      allLocations: locations
     })
   }
   
@@ -96,18 +107,17 @@ class App extends Component {
   handleSearch = (event) => {
     this.setState({
       search: event.target.value,
-      locations: this.state.allLocations.filter((location) => new RegExp(event.target.value, "i").exec(location.name))
+      locations: this.state.allLocations.filter((location) => 
+        new RegExp(event.target.value, "i").exec(location.name))
     });
   }
 
   render() {
     let allLocations = this.state.locations;
-
     let center = {
       lat: 59.32,
       lng: 18.06
     }
-
     let zoom = 11;
 
     if (this.state.selectedLocation) {
@@ -127,8 +137,10 @@ class App extends Component {
               zoom={zoom}
               onClick={this.getCoordinates}           
             >
-              <SaveLocationForm onAddLocation={this.handleAddLocation}/>
-
+              {this.state.displayLocationForm && 
+                <SaveLocationForm 
+                  handleAddLocation={this.handleAddLocation}/>
+              }
               {this.state.locations.map((location) => {
                 return <Marker 
                           key={location.id} 
@@ -149,7 +161,7 @@ class App extends Component {
               value={this.state.search}
               onChange={this.handleSearch} />
           </div>
-          
+
           <div className="list-container">
             <h2>Saved Places</h2>
             <ol>
@@ -159,13 +171,15 @@ class App extends Component {
                           location={location} 
                           selectLocation={this.selectLocation}
                         />
-                        <DeleteButton />
+                        <button 
+                          className="delete-button" 
+                          onClick={this.handleDeleteLocation.bind(this, location)}>Delete
+                        </button>
                       </li>
               })
             }
             </ol>      
           </div>
-          
         </div>
       </div>
     );
