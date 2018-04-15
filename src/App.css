@@ -9,6 +9,17 @@
     border: 1px solid grey;
 }
 
+.search-container {
+    padding: 20px;
+}
+
+.search-container input {
+    width: 100%;
+    height: 40px;
+    font-size: 1.2em;
+    color: #999;
+}
+
 h2 {
     text-align: center;
     font-size: 1.2em;
@@ -23,17 +34,6 @@ h2 {
      padding: 10px;
  }
  
- li .danger-button {
+ li .delete-button {
      float: right;
-     margin-right: 10px;
  }
- 
- .location-name {
-     cursor:pointer;
- }
- 
- .location-name:hover {
-     opacity: 0.5;
-     color: #000;
- }
- 
