@@ -1,4 +1,4 @@
-.marker-text {
+.marker {
     padding: 8px;
     background:#fff;
     border: 2px solid black;
@@ -8,8 +8,14 @@
     font-weight: 600;
     cursor: pointer;
     text-align: center;
+    display: none;
 }
 
-.marker-text:hover {
+.marker:hover {
     padding: 12px;
 }
+
+.marker.selected {
+    display: inline-block;
+}
+

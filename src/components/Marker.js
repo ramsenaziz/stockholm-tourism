@@ -4,9 +4,13 @@ import './Marker.css'
 
 class Marker extends Component {
     render() {
+        let classes = "marker";
+        if (this.props.selected) {
+            classes += " selected";
+        }
         return (
-            <div className="marker">
-                <span className="marker-text">{this.props.text}</span>
+            <div className={classes}>
+                <span>{this.props.text}</span>
             </div>
         );
     }
