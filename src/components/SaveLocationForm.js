@@ -4,12 +4,22 @@ import SaveButton from './SaveButton';
 import './SaveLocationForm.css'
 
 class SaveLocationForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
+        };
+    
+        this.handleChange = this.handleChange.bind(this);
+      }
 
-    onChange = () => {
-        console.log('Changing name');
+    handleChange = (event) => {
+        this.setState({
+            value: event.target.value
+        })
     }
 
-    onSubmit = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault();
         var name = this.refs.name.value.trim();
         
@@ -18,19 +28,17 @@ class SaveLocationForm extends Component {
             return;
         }
 
-        this.props.onAddLocation(name);
+        this.props.handleAddLocation(name);
         this.refs.name.value = '';
     }
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
-                    <label>Name:</label>
-                    <input type="text" ref="name" onChange={this.onChange}/>
-                    <SaveButton/>
-                </form>
-            </div>
+            <form onSubmit={this.handleSubmit}>
+                <label>Name:</label>
+                <input type="text" ref="name" value={this.state.value} onChange={this.handleChange}/>
+                <SaveButton/>
+            </form>
         );
     }
 }
