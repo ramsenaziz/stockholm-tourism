@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react'
 import Location from './components/Location'
 import Marker from './components/Marker'
 import DeleteButton from './components/DeleteButton'
-import SaveLocationForm from './components/SaveLocationForm';
+import SaveLocationForm from './components/SaveLocationForm'
 import './App.css'
 
 
@@ -52,10 +52,39 @@ class App extends Component {
         },
       ],
       selectedLocation: null,
-      search: ""
+      search: "",
+      currentLat: null,
+      currentLng: null,
     };
 
-    
+    this.getCoordinates = this.getCoordinates.bind(this);
+  
+  }
+
+  getCoordinates = (data) => {
+    let lat = data.lat;
+    let lng = data.lng;
+    console.log('lat: ' + lat);
+    console.log('let: ' + lng);
+
+    this.setState({
+      currentLat: lat,
+      currentLng: lng
+    })
+  }
+  
+  handleAddLocation = (name) => {
+    const newLocation = {
+      id: this.state.locations.length + 1,
+      name: name,
+      lat: this.state.currentLat,
+      lng: this.state.currentLng
+    }
+
+    this.setState({
+      locations: this.state.locations.concat(newLocation),
+      allLocations: this.state.locations.concat(newLocation)
+    })
   }
   
   selectLocation = (location) => {
@@ -96,16 +125,20 @@ class App extends Component {
             <GoogleMapReact
               center={center}
               zoom={zoom}
+              onClick={this.getCoordinates}           
             >
-            {this.state.locations.map((location) => {
-              return <Marker 
-                        key={location.id} 
-                        lat={location.lat} 
-                        lng={location.lng} 
-                        text={location.name} 
-                        selected={location === this.state.selectedLocation}
-                      /> 
-            })}
+              <SaveLocationForm onAddLocation={this.handleAddLocation}/>
+
+              {this.state.locations.map((location) => {
+                return <Marker 
+                          key={location.id} 
+                          lat={location.lat} 
+                          lng={location.lng} 
+                          text={location.name} 
+                          selected={location === this.state.selectedLocation}
+                        /> 
+                })
+              }
             </GoogleMapReact>
           </div>
 
@@ -128,11 +161,11 @@ class App extends Component {
                         />
                         <DeleteButton />
                       </li>
-            })}
+              })
+            }
             </ol>      
           </div>
-
-          <SaveLocationForm />
+          
         </div>
       </div>
     );
@@ -140,3 +173,6 @@ class App extends Component {
 }
 
 export default App
+
+
+
