@@ -28,7 +28,9 @@ class SaveLocationForm extends Component {
         }
 
         this.props.handleAddLocation(name);
-        this.refs.name.value = '';
+        this.setState({
+            value: ''
+        })
     }
 
     render() {
