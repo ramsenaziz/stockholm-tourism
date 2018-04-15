@@ -4,12 +4,31 @@ import SaveButton from './SaveButton';
 import './SaveLocationForm.css'
 
 class SaveLocationForm extends Component {
+
+    onChange = () => {
+        console.log('Changing name');
+    }
+
+    onSubmit = (event) => {
+        event.preventDefault();
+        var name = this.refs.name.value.trim();
+        
+        if(!name) {
+            alert('Please enter a name');
+            return;
+        }
+
+        this.props.onAddLocation(name);
+        this.refs.name.value = '';
+    }
+
     render() {
         return (
             <div>
-                <form action="">
-                    <input type="text" placeholder="Type in name..."/>
-                    <SaveButton />
+                <form onSubmit={this.onSubmit}>
+                    <label>Name:</label>
+                    <input type="text" ref="name" onChange={this.onChange}/>
+                    <SaveButton/>
                 </form>
             </div>
         );
