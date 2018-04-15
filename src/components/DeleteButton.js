@@ -5,7 +5,7 @@ import './DeleteButton.css'
 class DeleteButton extends Component {
     render() {
         return (
-            <button className="danger-button">Delete</button>
+            <button className="delete-button">Delete</button>
         );
     }
 }
