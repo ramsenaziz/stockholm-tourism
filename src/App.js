@@ -164,6 +164,9 @@ class App extends Component {
 
           <div className="list-container">
             <h2>Saved Places</h2>
+            {this.state.locations.length == 0 && 
+              <span>You have no saved locations.</span>
+            }
             <ol>
             {this.state.locations.map((location) => {
               return <li key={location.id}>
