@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SaveButton from './SaveButton';
 import './SaveLocationForm.css'
 
 class SaveLocationForm extends Component {
@@ -37,7 +36,7 @@ class SaveLocationForm extends Component {
             <form onSubmit={this.handleSubmit}>
                 <label>Name:</label>
                 <input type="text" ref="name" value={this.state.value} onChange={this.handleChange}/>
-                <SaveButton/>
+                <button className="save-button">Save</button>
             </form>
         );
     }
