@@ -4,7 +4,6 @@ import './Location.css'
 
 class Location extends Component {
     handleClick = () => {
-        // Call the parent method selectLocation
         this.props.selectLocation(this.props.location);
     }
     render() {
