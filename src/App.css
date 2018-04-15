@@ -1,3 +1,21 @@
+h2 {
+    text-align: center;
+    font-size: 1.2em;
+ }
+ 
+ ol {
+     padding: 8px;
+ }
+ 
+ li {
+     clear: both;
+     padding: 10px;
+ }
+ 
+ li .delete-button {
+     float: right;
+ }
+
 .map-container {
     height: 50vh;
     width: 100%;
@@ -19,21 +37,14 @@
     font-size: 1.2em;
     color: #999;
 }
-
-h2 {
-    text-align: center;
-    font-size: 1.2em;
- }
- 
- ol {
-     padding: 8px;
- }
- 
- li {
-     clear: both;
-     padding: 10px;
- }
- 
- li .delete-button {
-     float: right;
- }
+ .delete-button {
+    background: #d9534f;
+    width: 65px;
+    height: 25px;
+    border-radius: 8px;
+    color: #FFF;
+    font-size: 0.7em;
+    font-family: Tahoma, Helvetica, sans-serif;
+    text-transform: uppercase;
+    cursor:pointer;
+}
