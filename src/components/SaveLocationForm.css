@@ -1,7 +1,16 @@
-save-location-form {
-    border: 1px solid black;
-    border-radius: 5px;
-    max-width: 200px;
+.save-location-form {
+    border-radius: 10px;
+    background: rgba(0 , 0, 0, 0.2);
+    border: 6px dotted white;
+    width: 100%;
+    padding: 20px;
+}
+
+label {
+    font-size: 2em;
+    padding: 10px;
+    color: #fff;
+    font-weight: 500;
 }
 
 input {
@@ -9,16 +18,11 @@ input {
     padding: 8px;
     border-radius: 4px;
     cursor: pointer;
+    min-width: 300px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6em;
 }
 
-.save-button {
-    margin-left: 8px;
-    background: blue;
-    padding: 4px;
-    border-radius: 5px;
-    color: #FFF;
-    font-size: 0.8em;
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
-    cursor: pointer;
+.btn-primary {
+    margin-left: 10px;
 }
