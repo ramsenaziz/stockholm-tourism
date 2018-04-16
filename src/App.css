@@ -1,19 +1,29 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    display: inline-block;
+}
+
 h2 {
     text-align: center;
-    font-size: 1.2em;
- }
- 
- ol {
-     padding: 8px;
- }
- 
- li {
-     clear: both;
-     padding: 10px;
+    font-size: 1.4em;
  }
  
  li .delete-button {
      float: right;
+ }
+
+ .header-container {
+     padding: 20px;
+ }
+
+ img {
+     margin-left: 20px;
+     position: absolute;
+     top: 37px;
  }
 
 .map-container {
@@ -23,8 +33,6 @@ h2 {
 
 .list-container {
     padding: 20px;
-    border-radius: 4px;
-    border: 1px solid grey;
 }
 
 .search-container {
@@ -37,14 +45,27 @@ h2 {
     font-size: 1.2em;
     color: #999;
 }
- .delete-button {
-    background: #d9534f;
-    width: 65px;
-    height: 25px;
-    border-radius: 8px;
-    color: #FFF;
-    font-size: 0.7em;
-    font-family: Tahoma, Helvetica, sans-serif;
-    text-transform: uppercase;
-    cursor:pointer;
+
+.message-container {
+    width: 80%;
+    padding: 30px;  
+    margin: auto;
+    margin-top: 40px;
+    text-align: center;
+    background: rgba(0 , 0, 0, 0.1);
+    border: 6px dotted white;
+}
+
+#message {
+    font-size: 1.6em;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.btn-warning {
+    float: right;
+}
+
+.list-group-item {
+    padding: 24px;
 }
