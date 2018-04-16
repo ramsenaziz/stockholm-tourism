@@ -4,6 +4,8 @@ import Location from './components/Location'
 import Marker from './components/Marker'
 import SaveLocationForm from './components/SaveLocationForm'
 import Button from 'react-bootstrap/lib/Button'
+import ListGroup from 'react-bootstrap/lib/ListGroup'
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 
 import './App.css'
 
@@ -56,7 +58,7 @@ class App extends Component {
       search: "",
       currentLat: null,
       currentLng: null,
-      displayLocationForm: false,
+      displayLocationForm: null,
     };
 
     this.getCoordinates = this.getCoordinates.bind(this);
@@ -65,7 +67,6 @@ class App extends Component {
   getCoordinates = (data) => {
     const lat = data.lat;
     const lng = data.lng;
-    const displayLocationForm = this.state.displayLocationForm;
 
     this.setState({
       currentLat: lat,
@@ -82,15 +83,16 @@ class App extends Component {
       lng: this.state.currentLng
     }
     this.setState({
+      displayLocationForm: false,
       locations: this.state.locations.concat(newLocation),
-      allLocations: this.state.locations.concat(newLocation)
+      allLocations: this.state.locations.concat(newLocation),
     })
   }
 
   handleDeleteLocation = (location) => {
     const locations = this.state.locations;
     for(var i = 0; i < locations.length; i++) {
-      if(locations[i].id == location.id){
+      if(locations[i].id === location.id){
         locations.splice(i, 1)
       }
     }
@@ -115,7 +117,6 @@ class App extends Component {
   }
 
   render() {
-    let allLocations = this.state.locations;
     let center = {
       lat: 59.32,
       lng: 18.06
@@ -133,8 +134,16 @@ class App extends Component {
     return (
       <div className="App">
         <div className="main">
+          <div className="header-container">
+            <h1>Stockholm Tourism</h1>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
+              alt="Stockholm Tourism" 
+              with="33" 
+              height="33"/>
+          </div>
           <div className="map-container">
             <GoogleMapReact
+              bootstrapURLKeys={{key: 'AIzaSyCR177pvGQ5_0vKL6wSGr7P6zfudKb4rfI'}}
               center={center}
               zoom={zoom}
               onClick={this.getCoordinates}           
@@ -155,23 +164,25 @@ class App extends Component {
               }
             </GoogleMapReact>
           </div>
-
+        
           <div className="search-container">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search your saved places..."
               value={this.state.search}
               onChange={this.handleSearch} />
           </div>
 
           <div className="list-container">
-            <h2>Saved Places</h2>
-            {this.state.locations.length == 0 && 
-              <span>You have no saved locations.</span>
+           
+            {this.state.locations.length === 0 && 
+              <div className="message-container">
+                <span id="message">Sorry! Can't find any saved location Kumpano.</span>
+              </div> 
             }
-            <ol>
+            <ListGroup>
             {this.state.locations.map((location) => {
-              return <li key={location.id}>
+              return <ListGroupItem key={location.id} href="#">
                         <Location 
                           location={location} 
                           selectLocation={this.selectLocation}
@@ -180,10 +191,10 @@ class App extends Component {
                           bsStyle="warning"
                           onClick={this.handleDeleteLocation.bind(this, location)}>Delete
                         </Button>
-                      </li>
+                      </ListGroupItem>
               })
             }
-            </ol>      
+            </ListGroup>      
           </div>
         </div>
       </div>
