@@ -5,14 +5,12 @@
     width: 100%;
     padding: 20px;
 }
-
 label {
     font-size: 2em;
     padding: 10px;
     color: #fff;
     font-weight: 500;
 }
-
 input {
     border: 1px solid grey;
     padding: 8px;
@@ -22,7 +20,6 @@ input {
     font-family: 'Roboto', sans-serif;
     font-size: 1.6em;
 }
-
-.btn-primary {
+.btn-primary, .btn-success {
     margin-left: 10px;
 }

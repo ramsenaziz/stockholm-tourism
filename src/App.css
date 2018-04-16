@@ -1,51 +1,61 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
-
 h1 {
+    margin-left: 7px;
     font-size: 2em;
     display: inline-block;
 }
-
 h2 {
-    text-align: center;
-    font-size: 1.4em;
+    font-size: 1.6em;
  }
- 
+ul li {
+    font-size: 1.2em;
+    padding: 10px;
+}
  li .delete-button {
      float: right;
  }
-
  .header-container {
      padding: 20px;
  }
-
  img {
      margin-left: 20px;
      position: absolute;
      top: 37px;
  }
-
+ nav ul li {
+     display: inline-block;
+ }
 .map-container {
     height: 50vh;
     width: 100%;
 }
-
-.list-container {
+.information-container {
     padding: 20px;
 }
-
 .search-container {
     padding: 20px;
+    width: 85%;
+    margin: auto;
 }
-
+.search {
+    width: 100%;
+}
 .search-container input {
     width: 100%;
     height: 40px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     color: #999;
 }
-
+.list-container {
+    padding: 20px;
+    width: 85%;
+    margin: auto;
+}
+.list {
+    width: 100%;
+}
 .message-container {
     width: 80%;
     padding: 30px;  
@@ -55,17 +65,23 @@ h2 {
     background: rgba(0 , 0, 0, 0.1);
     border: 6px dotted white;
 }
-
 #message {
     font-size: 1.6em;
     padding: 20px;
     margin-top: 40px;
 }
-
 .btn-warning {
     float: right;
 }
-
 .list-group-item {
     padding: 24px;
+}
+
+.footer-container {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.footer-container ul li {
+    float: right;
 }

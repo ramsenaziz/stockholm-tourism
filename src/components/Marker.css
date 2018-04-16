@@ -1,20 +1,19 @@
 .marker {
     padding: 8px;
-    background:#fff;
+    background:#0062A9;
     border: 2px solid black;
     border-radius: 3px;
-    color: #000;
-    font-size: 1em;
+    color: #fff;
+    font-size: 1.6em;
     font-weight: 600;
     cursor: pointer;
     text-align: center;
+    text-transform: uppercase;
     display: none;
 }
-
 .marker:hover {
-    padding: 12px;
+    opacity: 0.7;
 }
-
 .marker.selected {
     display: inline-block;
 }
