@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import './Location.css'
 
 class Location extends Component {
@@ -17,10 +16,6 @@ class Location extends Component {
         );
     }
 }
-
-Location.propTypes = {
-
-};
 
 export default Location
  
