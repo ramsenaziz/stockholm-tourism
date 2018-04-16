@@ -209,7 +209,7 @@ class App extends Component {
             <div className="list">
               {this.state.locations.length === 0 && 
                 <div className="message-container">
-                  <span id="message">Sorry! Can't find any saved location Kumpano.</span>
+                  <span id="message">Sorry! Can not find any saved location Kumpano.</span>
                 </div> 
               }
               <ListGroup>
