@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 
-class AlertDismissable extends React.Component {
+class AlertDismissable extends Component {
     constructor(props, context) {
       super(props, context);
   
