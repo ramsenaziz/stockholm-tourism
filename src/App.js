@@ -17,42 +17,54 @@ class App extends Component {
       locations: [
         { 
           id: 1,
-          name: "Stureplan",
+          name: 'Svampen',
           lat: 59.339832, 
           lng: 18.075802 
         },
         { 
           id: 2,
-          name: "Kungsgatan",
+          name: 'Kungsgatan',
           lat: 59.334409, 
           lng: 18.059047 
         },
         { 
           id: 3,
-          name: "Medborgarplatsen",
+          name: 'Söder',
           lat: 59.315153, 
           lng: 18.071664 
         },
+        { 
+          id: 4,
+          name: 'Kumpan',
+          lat: 59.316145, 
+          lng: 18.028862 
+        }
       ],
       allLocations: [
         { 
           id: 1,
-          name: "Stureplan",
+          name: 'Svampen',
           lat: 59.339832, 
           lng: 18.075802 
         },
         { 
           id: 2,
-          name: "Kungsgatan",
+          name: 'Kungsgatan',
           lat: 59.334409, 
           lng: 18.059047 
         },
         { 
           id: 3,
-          name: "Medborgarplatsen",
+          name: 'Söder',
           lat: 59.315153, 
           lng: 18.071664 
         },
+        { 
+          id: 4,
+          name: 'Kumpan',
+          lat: 59.316145, 
+          lng: 18.028862 
+        }
       ],
       selectedLocation: null,
       search: "",
@@ -134,13 +146,21 @@ class App extends Component {
     return (
       <div className="App">
         <div className="main">
-          <div className="header-container">
+
+          <div className="header-container" id="header-container">
             <h1>Stockholm Tourism</h1>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
               alt="Stockholm Tourism" 
               with="33" 
               height="33"/>
+              <nav>
+                <ul>
+                  <li><a href="#header-container">Home</a></li>
+                  <li><a href="#search">Search</a></li>
+                </ul>
+              </nav>
           </div>
+
           <div className="map-container">
             <GoogleMapReact
               bootstrapURLKeys={{key: 'AIzaSyCR177pvGQ5_0vKL6wSGr7P6zfudKb4rfI'}}
@@ -164,37 +184,59 @@ class App extends Component {
               }
             </GoogleMapReact>
           </div>
-        
+
+          <div className="information-container">
+            <h2>Welcome to Stockholm Tourism</h2>
+            <ul>
+                <li>Use ⌘ + scroll to Zoom the map and drag and drop to find your location.</li>
+                <li>Then Click the map and save your location name.</li>
+                <li>You can filter your locations by typing in the name in the search bar.</li>
+                <li>You can delete your saved locations by pressing the delete button.</li>
+            </ul>         
+          </div>
+
           <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search your saved places..."
-              value={this.state.search}
-              onChange={this.handleSearch} />
+            <div className="search" id="search">
+              <input
+                type="text"
+                placeholder="Search your saved places..."
+                value={this.state.search}
+                onChange={this.handleSearch} />
+            </div>
           </div>
 
           <div className="list-container">
-           
-            {this.state.locations.length === 0 && 
-              <div className="message-container">
-                <span id="message">Sorry! Can't find any saved location Kumpano.</span>
-              </div> 
-            }
-            <ListGroup>
-            {this.state.locations.map((location) => {
-              return <ListGroupItem key={location.id} href="#">
-                        <Location 
-                          location={location} 
-                          selectLocation={this.selectLocation}
-                        />
-                        <Button 
-                          bsStyle="warning"
-                          onClick={this.handleDeleteLocation.bind(this, location)}>Delete
-                        </Button>
-                      </ListGroupItem>
-              })
-            }
-            </ListGroup>      
+            <div className="list">
+              {this.state.locations.length === 0 && 
+                <div className="message-container">
+                  <span id="message">Sorry! Can't find any saved location Kumpano.</span>
+                </div> 
+              }
+              <ListGroup>
+              {this.state.locations.map((location) => {
+                return <ListGroupItem key={location.id} href="#">
+                          <Location 
+                            location={location} 
+                            selectLocation={this.selectLocation}
+                          />
+                          <Button 
+                            bsStyle="warning"
+                            onClick={this.handleDeleteLocation.bind(this, location)}>Delete
+                          </Button>
+                        </ListGroupItem>
+                })
+              }
+              </ListGroup>
+            </div>      
+          </div>
+
+          <div className="footer-container">
+            <nav>
+              <ul>
+                <li>Site created by <a href="http://ramsen.se/">@ramsenaziz</a></li>
+                <li><a href="#header-container">Back to top</a></li>
+              </ul>
+          </nav>
           </div>
         </div>
       </div>
@@ -203,6 +245,3 @@ class App extends Component {
 }
 
 export default App
-
-
-
