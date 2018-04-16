@@ -1,39 +1,37 @@
-<img src="readme-logo.png"
-    alt="Stockholm Tourism"
-    width="200" />
+# Stockholm Tourism
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+Save your favorite locations in Stockholm with this app built with React.js.
 
-Recommended editor for this codebase is [Visual Studio Code](https://code.visualstudio.com/). Open this directory and the editor will ask for permission to download the recommended extensions.
+## Getting Started
 
-## Development workflow
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-@todo Add development workflow guidelines.
+### Installing
 
-## Folder structure
+```
+1. npm install
+2. npm run start
+3. visit http://localhost:8080
+```
 
-*Folders with an underscore prefix "_" are for non-feature code. They make up the core of the application.*
+## Built With
 
-/.vscode - Workspace settings for [VS Code](https://code.visualstudio.com/)
+* This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app)
+* [Google Map React](https://github.com/google-map-react/google-map-react)  - Used for the map
+* [React Boostrap](https://react-bootstrap.github.io/) - Used to style the components
 
-/node_modules - Contains dependencies, install with `$ npm install`
+## Contributing
 
-/public - This is the web server www-root
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-/src - The React application lives in here
+## Versioning
 
-## Naming
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
-When naming JS files, use .js if the file uses only standard Javascript functionality. Use .jsx if the file uses React or anything non-standard.
+## Authors
 
-## Dependencies
+* **Ramsen Aziz** - *Initial work* - [Ramsen Aziz](https://github.com/ramsenaziz)
 
-@todo Add descriptions of deps.
+## License
 
-## Testing
-
-@todo Add description and instructions for testing.
-
-## Deploying
-
-@todo Add deployment instructions.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
