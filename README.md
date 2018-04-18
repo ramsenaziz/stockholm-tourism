@@ -23,7 +23,3 @@ These instructions will get you a copy of the project up and running on your loc
 ## Authors
 
 * **Ramsen Aziz** - *Initial work* - [Ramsen Aziz](https://github.com/ramsenaziz)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
