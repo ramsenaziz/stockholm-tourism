@@ -64,7 +64,8 @@ class SaveLocationForm extends Component {
                     message="You have to fill in a name to save a location." />
                 }
                 <div className="save-location-container">
-                    <form className="save-location-form" 
+                    <form 
+                        className="save-location-form" 
                         onSubmit={this.handleSubmit}
                     >
                         <label htmlFor="name">Name:</label>
