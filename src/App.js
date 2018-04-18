@@ -3,9 +3,7 @@ import GoogleMapReact from 'google-map-react'
 import Location from './components/Location'
 import Marker from './components/Marker'
 import SaveLocationForm from './components/SaveLocationForm'
-import Button from 'react-bootstrap/lib/Button'
-import ListGroup from 'react-bootstrap/lib/ListGroup'
-import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 import './App.css'
 
@@ -13,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Hard coded locations for demonstration purpose
+      // Hard coded locations for demonstration purposes
       locations: [
         { 
           id: 1,
@@ -67,7 +65,7 @@ class App extends Component {
         }
       ],
       selectedLocation: null,
-      search: "",
+      search: '',
       currentLat: null,
       currentLng: null,
       displayLocationForm: null,
@@ -97,14 +95,14 @@ class App extends Component {
     this.setState({
       displayLocationForm: false,
       locations: this.state.locations.concat(newLocation),
-      allLocations: this.state.locations.concat(newLocation),
+      allLocations: this.state.locations.concat(newLocation)
     })
   }
 
   handleDeleteLocation = (location) => {
     const locations = this.state.locations;
     for(var i = 0; i < locations.length; i++) {
-      if(locations[i].id === location.id){
+      if(locations[i].id === location.id) {
         locations.splice(i, 1)
       }
     }
@@ -149,7 +147,9 @@ class App extends Component {
 
           <div className="header-container" id="header-container">
             <h1>Stockholm Tourism</h1>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/
+              4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
               alt="Stockholm Tourism" 
               with="33" 
               height="33"/>
@@ -189,17 +189,17 @@ class App extends Component {
             <h2>Welcome to Stockholm Tourism</h2>
             <ul>
                 <li>Use ⌘ + scroll to Zoom the map and drag and drop to find your location.</li>
-                <li>Then Click the map and save your location name.</li>
-                <li>You can filter your locations by typing in the name in the search bar.</li>
-                <li>You can delete your saved locations by pressing the delete button.</li>
+                <li>Click the map and save your location name.</li>
+                <li>You can filter your locations list by typing in the name in the search bar.</li>
+                <li>You can delete your saved locations by clicking the delete button.</li>
             </ul>         
           </div>
 
           <div className="search-container">
             <div className="search" id="search">
               <input
-                type="text"
-                placeholder="Search your saved places..."
+                type='text'
+                placeholder='Search your saved places...'
                 value={this.state.search}
                 onChange={this.handleSearch} />
             </div>
@@ -209,7 +209,7 @@ class App extends Component {
             <div className="list">
               {this.state.locations.length === 0 && 
                 <div className="message-container">
-                  <span id="message">Sorry! Can not find any saved location Kumpano.</span>
+                  <span id="message">Sorry! Can not find any saved location Kumpadre.</span>
                 </div> 
               }
               <ListGroup>
@@ -220,7 +220,7 @@ class App extends Component {
                             selectLocation={this.selectLocation}
                           />
                           <Button 
-                            bsStyle="warning"
+                            bsStyle='warning'
                             onClick={this.handleDeleteLocation.bind(this, location)}>Delete
                           </Button>
                         </ListGroupItem>

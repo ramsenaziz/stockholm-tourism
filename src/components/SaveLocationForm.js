@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AlertDismissable from './AlertDismissable'
-import Button from 'react-bootstrap/lib/Button'
+import { Button } from 'react-bootstrap'
 
 import './SaveLocationForm.css'
 
@@ -59,20 +59,28 @@ class SaveLocationForm extends Component {
         return (
             <div>
                 {this.state.alertMessage && 
-                <AlertDismissable title="Kumpano, use your imagination." message="You have to fill in a name to save a location." />
+                <AlertDismissable 
+                    title="Kumpadre, use your imagination." 
+                    message="You have to fill in a name to save a location." />
                 }
-
                 <div className="save-location-container">
-                    <form className="save-location-form" onSubmit={this.handleSubmit}>
+                    <form className="save-location-form" 
+                        onSubmit={this.handleSubmit}
+                    >
                         <label htmlFor="name">Name:</label>
-                        <input type="text" ref="name" value={this.state.value} onChange={this.handleChange}/>
-                        <Button bsStyle={buttonStyle} onClick={this.handleSubmit}>{buttonText}</Button>
+                        <input 
+                            type="text" ref="name" 
+                            value={this.state.value} 
+                            onChange={this.handleChange}/>
+                        <Button 
+                            bsStyle={buttonStyle} 
+                            onClick={this.handleSubmit}>{buttonText}
+                        </Button>
                     </form>
                 </div>
-             
             </div>
         );
     }
 }
 
-export default SaveLocationForm;
+export default SaveLocationForm
