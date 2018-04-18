@@ -148,8 +148,7 @@ class App extends Component {
           <div className="header-container" id="header-container">
             <h1>Stockholm Tourism</h1>
             <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/
-              4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
               alt="Stockholm Tourism" 
               with="33" 
               height="33"/>
