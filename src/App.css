@@ -1,5 +1,20 @@
-body {
+html {
     font-family: 'Roboto', sans-serif;
+    color: #555F61;
+}
+a {
+    color: #555F61;
+}
+a:hover {
+    opacity: 0.5;
+    text-decoration: none;
+    color: #555F61;
+}
+a:visited {
+    text-decoration: none;
+}
+a:active {
+    text-decoration: none;
 }
 h1 {
     margin-left: 7px;
@@ -9,6 +24,9 @@ h1 {
 h2 {
     font-size: 1.6em;
  }
+ul {
+    padding: 0px;
+}
 ul li {
     font-size: 1.2em;
     padding: 10px;
@@ -27,16 +45,20 @@ ul li {
  nav ul li {
      display: inline-block;
  }
+.main-container {
+    max-width: 900px;
+    margin: auto;
+}
 .map-container {
     height: 50vh;
     width: 100%;
 }
 .information-container {
-    padding: 20px;
+    padding: 40px;
 }
 .search-container {
     padding: 20px;
-    width: 85%;
+    width: 100%;
     margin: auto;
 }
 .search {
@@ -50,11 +72,8 @@ ul li {
 }
 .list-container {
     padding: 20px;
-    width: 85%;
-    margin: auto;
-}
-.list {
     width: 100%;
+    margin: auto;
 }
 .message-container {
     width: 80%;
@@ -73,15 +92,16 @@ ul li {
 .btn-warning {
     float: right;
 }
+button.btn.btn-default {
+    margin-bottom: 10px;
+}
 .list-group-item {
     padding: 24px;
 }
-
 .footer-container {
     margin-top: 20px;
     padding: 20px;
 }
-
 .footer-container ul li {
     float: right;
 }
