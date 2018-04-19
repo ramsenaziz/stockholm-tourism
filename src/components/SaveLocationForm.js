@@ -12,21 +12,13 @@ class SaveLocationForm extends Component {
             alertMessage: false,
             text: 'Save',
             bgColor: 'primary',
-        };
-    
-        this.handleChange = this.handleChange.bind(this);
+            showForm: 'false'
+        };        
       }
     
     handleChange = (event) => {
         this.setState({
             value: event.target.value
-        })
-    }
-
-    handleClick = (event) => {
-        event.preventDefault();
-        this.setState({
-            hideForm: false
         })
     }
 
@@ -52,6 +44,13 @@ class SaveLocationForm extends Component {
         })
     }
 
+    handleClick = () => {
+        this.props.handleToggleForm(this.props.handleToggleForm);
+        this.setState({
+            show: 'true'
+        })
+    }
+
     render() {
         let buttonStyle = this.state.bgColor;
         let buttonText = this.state.text;
@@ -59,26 +58,31 @@ class SaveLocationForm extends Component {
         return (
             <div>
                 {this.state.alertMessage && 
-                <AlertDismissable 
-                    title="Kumpadre, use your imagination." 
-                    message="You have to fill in a name to save a location." />
+                    <AlertDismissable 
+                        title="Kumpadre, use your imagination." 
+                        message="You have to fill in a name to save a location." />
+                    }
+                {this.state.showForm && 
+                    <div className="save-location-container">
+                    <button className="close-btn" onClick={this.handleClick}>x</button>
+                        <form 
+                            className="save-location-form" 
+                            onSubmit={this.handleSubmit}
+                        >
+                            <label htmlFor="name">Name:</label>
+                            <input 
+                                type="text" ref="name" 
+                                value={this.state.value} 
+                                onChange={this.handleChange}
+                                placeholder="Type in a name..."
+                                autoFocus/>
+                            <Button 
+                                bsStyle={buttonStyle} 
+                                onClick={this.handleSubmit}>{buttonText}
+                            </Button>
+                        </form>
+                    </div>
                 }
-                <div className="save-location-container">
-                    <form 
-                        className="save-location-form" 
-                        onSubmit={this.handleSubmit}
-                    >
-                        <label htmlFor="name">Name:</label>
-                        <input 
-                            type="text" ref="name" 
-                            value={this.state.value} 
-                            onChange={this.handleChange}/>
-                        <Button 
-                            bsStyle={buttonStyle} 
-                            onClick={this.handleSubmit}>{buttonText}
-                        </Button>
-                    </form>
-                </div>
             </div>
         );
     }
