@@ -10,8 +10,7 @@ class Location extends Component {
         return (
             <span 
                 className="location" 
-                onClick={this.handleClick}>
-                {name}
+                onClick={this.handleClick}>{name}
             </span>
         );
     }
