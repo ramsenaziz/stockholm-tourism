@@ -68,10 +68,8 @@ class App extends Component {
       search: '',
       currentLat: null,
       currentLng: null,
-      displayLocationForm: null,
+      displayLocationForm: false,
     };
-
-    this.getCoordinates = this.getCoordinates.bind(this);
   }
 
   getCoordinates = (data) => {
@@ -93,7 +91,6 @@ class App extends Component {
       lng: this.state.currentLng
     }
     this.setState({
-      displayLocationForm: false,
       locations: this.state.locations.concat(newLocation),
       allLocations: this.state.locations.concat(newLocation)
     })
@@ -126,6 +123,12 @@ class App extends Component {
     });
   }
 
+  handleToggleForm = () => {
+    this.setState({ 
+      displayLocationForm: false
+  });
+}
+
   render() {
     let center = {
       lat: 59.32,
@@ -143,42 +146,51 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="main">
-
+        <div className="main-container">
           <div className="header-container" id="header-container">
-            <h1>Stockholm Tourism</h1>
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
-              alt="Stockholm Tourism" 
-              with="33" 
-              height="33"/>
-              <nav>
-                <ul>
-                  <li><a href="#header-container">Home</a></li>
-                  <li><a href="#search">Search</a></li>
-                </ul>
-              </nav>
+            <a href="#header-container">
+              <div>
+                <h1>Stockholm Tourism</h1>
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
+                  alt="Stockholm Tourism" 
+                  with="33" 
+                  height="33"/>
+              </div>
+            </a>
+
+            <nav>
+              <ul>
+                <li><a href="https://www.visitstockholm.com/" target="_blank" rel="noopener noreferrer">Visit</a></li>
+                <li><a href="#search">Search</a></li>
+              </ul>
+            </nav>
           </div>
 
-          <div className="map-container">
+          {this.state.displayLocationForm && 
+            <div className="save-location-form-container">
+              <SaveLocationForm 
+              handleAddLocation={this.handleAddLocation}
+              handleToggleForm={this.handleToggleForm}/>
+            </div>    
+          }
+
+          <div className="map-container" id="map-container">
             <GoogleMapReact
               bootstrapURLKeys={{key: 'AIzaSyCR177pvGQ5_0vKL6wSGr7P6zfudKb4rfI'}}
               center={center}
               zoom={zoom}
               onClick={this.getCoordinates}           
             >
-              {this.state.displayLocationForm && 
-                <SaveLocationForm 
-                  handleAddLocation={this.handleAddLocation}/>
-              }
+              
               {this.state.locations.map((location) => {
-                return <Marker 
+                return <Marker                           
                           key={location.id} 
                           lat={location.lat} 
                           lng={location.lng} 
                           text={location.name} 
                           selected={location === this.state.selectedLocation}
-                        /> 
+                        />                  
                 })
               }
             </GoogleMapReact>
@@ -212,19 +224,19 @@ class App extends Component {
                 </div> 
               }
               <ListGroup>
-              {this.state.locations.map((location) => {
-                return <ListGroupItem key={location.id} href="#">
-                          <Location 
-                            location={location} 
-                            selectLocation={this.selectLocation}
-                          />
-                          <Button 
-                            bsStyle='warning'
-                            onClick={this.handleDeleteLocation.bind(this, location)}>Delete
-                          </Button>
-                        </ListGroupItem>
-                })
-              }
+                {this.state.locations.map((location) => {
+                  return <ListGroupItem key={location.id} href="#map-container">
+                            <Location 
+                              location={location} 
+                              selectLocation={this.selectLocation}
+                            />
+                            <Button 
+                              bsStyle='warning'
+                              onClick={this.handleDeleteLocation.bind(this, location)}>Delete
+                            </Button>
+                          </ListGroupItem>
+                  })
+                }
               </ListGroup>
             </div>      
           </div>
