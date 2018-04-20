@@ -16,13 +16,13 @@ class SaveLocationForm extends Component {
         };        
       }
     
-    handleChange = (event) => {
+    onNameChange = (event) => {
         this.setState({
             value: event.target.value
         })
     }
 
-    handleSubmit = (event) => {
+    onSubmit = (event) => {
         event.preventDefault();
         var name = this.refs.name.value.trim();
         
@@ -35,7 +35,7 @@ class SaveLocationForm extends Component {
             return;
         }
 
-        this.props.handleAddLocation(name);
+        this.props.onAddLocation(name);
         this.setState({
             value: '',
             alertMessage: false,
@@ -44,7 +44,7 @@ class SaveLocationForm extends Component {
         })
     }
 
-    handleClick = () => {
+    onClick = () => {
         this.props.handleToggleForm(this.props.handleToggleForm);
         this.setState({
             show: 'true'
@@ -64,21 +64,21 @@ class SaveLocationForm extends Component {
                     }
                 {this.state.showForm && 
                     <div className="save-location-container">
-                    <button className="close-btn" onClick={this.handleClick}>x</button>
+                    <button className="close-btn" onClick={this.onClick}>x</button>
                         <form 
                             className="save-location-form" 
-                            onSubmit={this.handleSubmit}
+                            onSubmit={this.onSubmit}
                         >
                             <label htmlFor="name">Name:</label>
                             <input 
                                 type="text" ref="name" 
                                 value={this.state.value} 
-                                onChange={this.handleChange}
-                                placeholder="Type in a name..."
+                                onChange={this.onNameChange}
+                                placeholder="Save this position..."
                                 autoFocus/>
                             <Button 
                                 bsStyle={buttonStyle} 
-                                onClick={this.handleSubmit}>{buttonText}
+                                onClick={this.onSubmit}>{buttonText}
                             </Button>
                         </form>
                     </div>

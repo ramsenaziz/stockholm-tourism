@@ -18,7 +18,8 @@ input {
     cursor: pointer;
     min-width: 300px;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.4em;
+    font-size: 1.2em;
+    padding: 5px;
 }
 .btn-primary, .btn-success {
     margin-left: 10px;

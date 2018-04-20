@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import Header from './components/Header'
 import GoogleMapReact from 'google-map-react'
 import Location from './components/Location'
+import Information from './components/Information'
+import Footer from './components/Footer'
+import PlacementMarker from './components/PlacementMarker'
 import Marker from './components/Marker'
 import SaveLocationForm from './components/SaveLocationForm'
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
@@ -11,8 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Hard coded locations for demonstration purposes
-      locations: [
+      
+      locations: [ // Hard coded for demo purposes.
         { 
           id: 1,
           name: 'Svampen',
@@ -38,52 +42,34 @@ class App extends Component {
           lng: 18.028862 
         }
       ],
-      allLocations: [
-        { 
-          id: 1,
-          name: 'Svampen',
-          lat: 59.339832, 
-          lng: 18.075802 
-        },
-        { 
-          id: 2,
-          name: 'Kungsgatan',
-          lat: 59.334409, 
-          lng: 18.059047 
-        },
-        { 
-          id: 3,
-          name: 'Söder',
-          lat: 59.315153, 
-          lng: 18.071664 
-        },
-        { 
-          id: 4,
-          name: 'Kumpan',
-          lat: 59.316145, 
-          lng: 18.028862 
-        }
-      ],
+
       selectedLocation: null,
       search: '',
       currentLat: null,
       currentLng: null,
       displayLocationForm: false,
+      placementMarkerText: 'Hello',
     };
+
+   this.state.allLocations = this.state.locations.slice();
   }
 
-  getCoordinates = (data) => {
+  // Click on map to save lat & lng position. Display save form. Add text to map marker.
+  onMapClick = (data) => {
+    const placementMarkerText = "Lat: " + data.lat + ", " + "Lng: " + data.lng;
     const lat = data.lat;
     const lng = data.lng;
 
     this.setState({
       currentLat: lat,
       currentLng: lng,
-      displayLocationForm: true
+      displayLocationForm: true,
+      placementMarkerText: placementMarkerText
     })
   }
-  
-  handleAddLocation = (name) => {
+
+  // Concat new location item to locations and allLocations array
+  onAddLocation = (name) => {
     const newLocation = {
       id: this.state.locations.length + 1,
       name: name,
@@ -96,7 +82,8 @@ class App extends Component {
     })
   }
 
-  handleDeleteLocation = (location) => {
+  // Delete list item in locations and allLocations array
+  onDeleteLocation = (location) => {
     const locations = this.state.locations;
     for(var i = 0; i < locations.length; i++) {
       if(locations[i].id === location.id) {
@@ -109,12 +96,15 @@ class App extends Component {
     })
   }
   
+  // Pass props value to Marker component so it renders selected listitem
   selectLocation = (location) => {
     this.setState({
-      selectedLocation: location
+      selectedLocation: location,
+      placementMarkerText: ''
     });
   }
 
+  // Change inputfield value and filter out listitems
   handleSearch = (event) => {
     this.setState({
       search: event.target.value,
@@ -123,6 +113,7 @@ class App extends Component {
     });
   }
 
+  // Passing down method to SearchForm.js so the state of displayLocationForm is equal to appstate
   handleToggleForm = () => {
     this.setState({ 
       displayLocationForm: false
@@ -134,7 +125,7 @@ class App extends Component {
       lat: 59.32,
       lng: 18.06
     }
-    let zoom = 11;
+    let zoom = 11;    
 
     if (this.state.selectedLocation) {
       center = {
@@ -147,31 +138,16 @@ class App extends Component {
     return (
       <div className="App">
         <div className="main-container">
-          <div className="header-container" id="header-container">
-            <a href="#header-container">
-              <div>
-                <h1>Stockholm Tourism</h1>
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/2000px-Stockholm_vapen_bra.svg.png" 
-                  alt="Stockholm Tourism" 
-                  with="33" 
-                  height="33"/>
-              </div>
-            </a>
 
-            <nav>
-              <ul>
-                <li><a href="https://www.visitstockholm.com/" target="_blank" rel="noopener noreferrer">Visit</a></li>
-                <li><a href="#search">Search</a></li>
-              </ul>
-            </nav>
+          <div className="header-container">
+            <Header />
           </div>
 
           {this.state.displayLocationForm && 
             <div className="save-location-form-container">
               <SaveLocationForm 
-              handleAddLocation={this.handleAddLocation}
-              handleToggleForm={this.handleToggleForm}/>
+                onAddLocation={this.onAddLocation}
+                handleToggleForm={this.handleToggleForm}/>
             </div>    
           }
 
@@ -180,8 +156,12 @@ class App extends Component {
               bootstrapURLKeys={{key: 'AIzaSyCR177pvGQ5_0vKL6wSGr7P6zfudKb4rfI'}}
               center={center}
               zoom={zoom}
-              onClick={this.getCoordinates}           
+              onClick={this.onMapClick}           
             >
+              <PlacementMarker 
+                lat={this.state.currentLat} 
+                lng={this.state.currentLng} 
+                text={this.state.placementMarkerText} />
               
               {this.state.locations.map((location) => {
                 return <Marker                           
@@ -197,13 +177,7 @@ class App extends Component {
           </div>
 
           <div className="information-container">
-            <h2>Welcome to Stockholm Tourism</h2>
-            <ul>
-                <li>Use ⌘ + scroll to Zoom the map and drag and drop to find your location.</li>
-                <li>Click the map and save your location name.</li>
-                <li>You can filter your locations list by typing in the name in the search bar.</li>
-                <li>You can delete your saved locations by clicking the delete button.</li>
-            </ul>         
+            <Information />
           </div>
 
           <div className="search-container">
@@ -225,14 +199,17 @@ class App extends Component {
               }
               <ListGroup>
                 {this.state.locations.map((location) => {
-                  return <ListGroupItem key={location.id} href="#map-container">
-                            <Location 
+                  return <ListGroupItem 
+                            key={location.id} 
+                          >
+                            <a href="#map-container">
+                              <Location 
                               location={location} 
-                              selectLocation={this.selectLocation}
-                            />
+                              selectLocation={this.selectLocation} />
+                            </a> 
                             <Button 
                               bsStyle='warning'
-                              onClick={this.handleDeleteLocation.bind(this, location)}>Delete
+                              onClick={this.onDeleteLocation.bind(this, location)}>Delete
                             </Button>
                           </ListGroupItem>
                   })
@@ -242,12 +219,7 @@ class App extends Component {
           </div>
 
           <div className="footer-container">
-            <nav>
-              <ul>
-                <li>Site created by <a href="http://ramsen.se/">@ramsenaziz</a></li>
-                <li><a href="#header-container">Back to top</a></li>
-              </ul>
-          </nav>
+            <Footer />
           </div>
         </div>
       </div>
