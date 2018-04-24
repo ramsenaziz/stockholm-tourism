@@ -56,7 +56,7 @@ class App extends Component {
 
   // Click on map to save lat & lng position. Display save form. Add text to map marker.
   onMapClick = (data) => {
-    const placementMarkerText = "Lat: " + data.lat + ", " + "Lng: " + data.lng;
+    const placementMarkerText = `Lat: ${data.lat}, Lng: ${data.lng}`; 
     const lat = data.lat;
     const lng = data.lng;
 
