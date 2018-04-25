@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './Location.css'
 
 class Location extends Component {
@@ -14,6 +15,10 @@ class Location extends Component {
             </span>
         );
     }
+}
+
+Location.propTypes = {
+    onClick: PropTypes.func
 }
 
 export default Location
