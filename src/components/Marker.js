@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './Marker.css'
 
 class Marker extends Component {
@@ -13,6 +14,13 @@ class Marker extends Component {
             </div>
         );
     }
+}
+
+Marker.propTypes = {
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    selected: PropTypes.bool.isRequired
 }
 
 export default Marker
