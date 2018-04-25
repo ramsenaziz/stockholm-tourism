@@ -16,15 +16,15 @@ class SaveLocationForm extends Component {
         };        
       }
     
-    onNameChange = (event) => {
+    handleChange = (e) => {
         this.setState({
-            value: event.target.value
+            value: e.target.value
         })
     }
 
-    onSubmit = (event) => {
-        event.preventDefault();
-        var name = this.refs.name.value.trim();
+    onSubmit = (e) => {
+        e.preventDefault();
+        let name = this.refs.name.value.trim();
         
         if(!name) {
             this.setState({
@@ -59,12 +59,12 @@ class SaveLocationForm extends Component {
             <div>
                 {this.state.alertMessage && 
                     <AlertDismissable 
-                        title="Kumpadre, use your imagination." 
+                        title="Fill in name" 
                         message="You have to fill in a name to save a location." />
                     }
                 {this.state.showForm && 
                     <div className="save-location-container">
-                    <button className="close-btn" onClick={this.onClick}>x</button>
+                    <button className="close-btn" onClick={this.onClick}>&times;</button>
                         <form 
                             className="save-location-form" 
                             onSubmit={this.onSubmit}
@@ -73,7 +73,7 @@ class SaveLocationForm extends Component {
                             <input 
                                 type="text" ref="name" 
                                 value={this.state.value} 
-                                onChange={this.onNameChange}
+                                onChange={this.handleChange}
                                 placeholder="Save this position..."
                                 autoFocus/>
                             <Button 
