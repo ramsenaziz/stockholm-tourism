@@ -8,41 +8,20 @@ import PlacementMarker from './components/PlacementMarker'
 import Marker from './components/Marker'
 import SaveLocationForm from './components/SaveLocationForm'
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
-
+import { DB_CONFIG } from './Config/config'
+import firebase from 'firebase/app'
+import 'firebase/database'
 import './App.css'
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      
-      locations: [ // Hard coded for demo purposes.
-        { 
-          id: 1,
-          name: 'Svampen',
-          lat: 59.339832, 
-          lng: 18.075802 
-        },
-        { 
-          id: 2,
-          name: 'Kungsgatan',
-          lat: 59.334409, 
-          lng: 18.059047 
-        },
-        { 
-          id: 3,
-          name: 'Söder',
-          lat: 59.315153, 
-          lng: 18.071664 
-        },
-        { 
-          id: 4,
-          name: 'Kumpan',
-          lat: 59.316145, 
-          lng: 18.028862 
-        }
-      ],
 
+    this.app = firebase.initializeApp(DB_CONFIG);
+    this.database = this.app.database().ref().child('locations');
+
+    this.state = {
+      locations: [],
       selectedLocation: null,
       search: '',
       currentLat: null,
@@ -50,8 +29,39 @@ class App extends Component {
       displayLocationForm: false,
       placementMarkerText: 'Hello',
     };
+    
+    this.state.allLocations = this.state.locations.slice();
+  }
 
-   this.state.allLocations = this.state.locations.slice();
+  componentWillMount = () => {
+    const previousLocations = this.state.locations;
+    
+    // DataSnapshot
+    this.database.on('child_added', snap => {
+      previousLocations.push({
+        id: snap.key,
+        name: snap.val().name,
+        lat: snap.val().lat,
+        lng: snap.val().lng,
+      })
+
+      this.setState({
+        locations: previousLocations,
+        allLocations: previousLocations
+      })
+    })
+
+    this.database.on('child_removed', snap => {
+      for(var i = 0; i < previousLocations.length; i++) {
+        if(previousLocations[i].id === snap.key) {
+          previousLocations.splice(i, 1)
+        }
+      }
+
+      this.setState({
+        loctions: previousLocations
+      })
+    })
   }
 
   // Click on map to save lat & lng position. Display save form. Add text to map marker.
@@ -67,33 +77,19 @@ class App extends Component {
       placementMarkerText: placementMarkerText
     })
   }
-
-  // Concat new location item to locations and allLocations array
-  onAddLocation = (name) => {
-    const newLocation = {
-      id: this.state.locations.length + 1,
+  
+  // Add item to database
+   onAddLocation = (name) => {
+    this.database.push().set({
       name: name,
       lat: this.state.currentLat,
       lng: this.state.currentLng
-    }
-    this.setState({
-      locations: this.state.locations.concat(newLocation),
-      allLocations: this.state.locations.concat(newLocation)
     })
   }
 
-  // Delete list item in locations and allLocations array
+  // Delete list item from database
   onDeleteLocation = (location) => {
-    const locations = this.state.locations;
-    for(var i = 0; i < locations.length; i++) {
-      if(locations[i].id === location.id) {
-        locations.splice(i, 1)
-      }
-    }
-    this.setState({
-      locations: locations,
-      allLocations: locations
-    })
+    this.database.child(location).remove();
   }
   
   // Pass props value to Marker component so it renders selected listitem
@@ -105,11 +101,11 @@ class App extends Component {
   }
 
   // Change inputfield value and filter out listitems
-  handleSearch = (event) => {
+  handleSearch = (e) => {
     this.setState({
-      search: event.target.value,
+      search: e.target.value,
       locations: this.state.allLocations.filter((location) => 
-        new RegExp(event.target.value, "i").exec(location.name))
+        new RegExp(e.target.value, "i").exec(location.name))
     });
   }
 
@@ -176,10 +172,6 @@ class App extends Component {
             </GoogleMapReact>
           </div>
 
-          <div className="information-container">
-            <Information />
-          </div>
-
           <div className="search-container">
             <div className="search" id="search">
               <input
@@ -192,30 +184,34 @@ class App extends Component {
 
           <div className="list-container">
             <div className="list">
-              {this.state.locations.length === 0 && 
+              {
+                this.state.locations.length === 0 && 
                 <div className="message-container">
-                  <span id="message">Sorry! Can not find any saved location Kumpadre.</span>
+                  <span id="message">Can not find any saved location.</span>
                 </div> 
               }
               <ListGroup>
                 {this.state.locations.map((location) => {
-                  return <ListGroupItem 
-                            key={location.id} 
+                  return <ListGroupItem key={location.id}    
                           >
                             <a href="#map-container">
                               <Location 
-                              location={location} 
-                              selectLocation={this.selectLocation} />
+                                location={location} 
+                                selectLocation={this.selectLocation} />
                             </a> 
                             <Button 
                               bsStyle='warning'
-                              onClick={this.onDeleteLocation.bind(this, location)}>Delete
+                              onClick={() => this.onDeleteLocation(location.id)}>Delete
                             </Button>
                           </ListGroupItem>
                   })
                 }
               </ListGroup>
             </div>      
+          </div>
+
+          <div className="information-container">
+            <Information />
           </div>
 
           <div className="footer-container">
